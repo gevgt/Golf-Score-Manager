@@ -1,0 +1,156 @@
+Sub Schaltfläche4_Klicken()
+'Delete Button: Deletes the score from the date you type into the field
+
+Dim i As Integer
+Dim j As Integer
+Dim k As Integer
+Dim l As Integer
+Dim feld As String
+
+feld = InputBox("Type Date like DD.MM.YY", "Delete Score")
+
+'Deletes from Course "A"
+
+i = 1
+Do While Worksheets("A").Range("apar").Offset(i, 1) <> ""
+        If Worksheets("A").Range("apar").Offset(i, 12) = feld Then
+                For j = 1 To 12
+                        Worksheets("A").Range("apar").Offset(i, j) = ""
+                Next j
+                k = i + 1
+                Do While Worksheets("A").Range("apar").Offset(k, 1) <> ""
+                        For l = 1 To 12
+                        Worksheets("A").Range("apar").Offset(k - 1, l) = Worksheets("A").Range("apar").Offset(k, l)
+                        Worksheets("A").Range("apar").Offset(k - 1, l).Interior.ColorIndex = Worksheets("A").Range("apar").Offset(k, l).Interior.ColorIndex
+                        Next l
+                k = k + 1
+                Loop
+                For l = 1 To 12
+                        Worksheets("A").Range("apar").Offset(k - 1, l) = ""
+                        Worksheets("A").Range("apar").Offset(k - 1, l).Interior.ColorIndex = 0
+                Next l
+        End If
+        i = i + 1
+Loop
+
+'Deletes from Course "B"
+
+i = 1
+Do While Worksheets("B").Range("bpar").Offset(i, 1) <> ""
+        If Worksheets("B").Range("bpar").Offset(i, 12) = feld Then
+                For j = 1 To 12
+                        Worksheets("B").Range("bpar").Offset(i, j) = ""
+                Next j
+                k = i + 1
+                Do While Worksheets("B").Range("bpar").Offset(k, 1) <> ""
+                        For l = 1 To 12
+                        Worksheets("B").Range("bpar").Offset(k - 1, l) = Worksheets("B").Range("bpar").Offset(k, l)
+                        Worksheets("B").Range("bpar").Offset(k - 1, l).Interior.ColorIndex = Worksheets("B").Range("bpar").Offset(k, l).Interior.ColorIndex
+                        Next l
+                k = k + 1
+                Loop
+                For l = 1 To 12
+                        Worksheets("B").Range("bpar").Offset(k - 1, l) = ""
+                        Worksheets("B").Range("bpar").Offset(k - 1, l).Interior.ColorIndex = 0
+                Next l
+        End If
+        i = i + 1
+Loop
+
+'Deletes from Course "C"
+
+i = 1
+Do While Worksheets("C").Range("cpar").Offset(i, 1) <> ""
+        If Worksheets("C").Range("cpar").Offset(i, 12) = feld Then
+                For j = 1 To 12
+                        Worksheets("C").Range("cpar").Offset(i, j) = ""
+                Next j
+                k = i + 1
+                Do While Worksheets("C").Range("cpar").Offset(k, 1) <> ""
+                        For l = 1 To 12
+                        Worksheets("C").Range("cpar").Offset(k - 1, l) = Worksheets("C").Range("cpar").Offset(k, l)
+                        Worksheets("C").Range("cpar").Offset(k - 1, l).Interior.ColorIndex = Worksheets("C").Range("cpar").Offset(k, l).Interior.ColorIndex
+                        Next l
+                k = k + 1
+                Loop
+                For l = 1 To 12
+                        Worksheets("C").Range("cpar").Offset(k - 1, l) = ""
+                        Worksheets("C").Range("cpar").Offset(k - 1, l).Interior.ColorIndex = 0
+                Next l
+        End If
+        i = i + 1
+Loop
+
+'Deltes from Course "AB"
+
+i = 1
+Do While Worksheets("A+B").Range("abpar").Offset(i, 1) <> ""
+        If Worksheets("A+B").Range("abpar").Offset(i, 23) = feld Then
+                For j = 1 To 23
+                        Worksheets("A+B").Range("abpar").Offset(i, j) = ""
+                Next j
+                k = i + 1
+                Do While Worksheets("A+B").Range("abpar").Offset(k, 1) <> ""
+                        For l = 1 To 23
+                        Worksheets("A+B").Range("abpar").Offset(k - 1, l) = Worksheets("A+B").Range("abpar").Offset(k, l)
+                        Worksheets("A+B").Range("abpar").Offset(k - 1, l).Interior.ColorIndex = Worksheets("A+B").Range("abpar").Offset(k, l).Interior.ColorIndex
+                        Next l
+                k = k + 1
+                Loop
+                For l = 1 To 23
+                        Worksheets("A+B").Range("abpar").Offset(k - 1, l) = ""
+                        Worksheets("A+B").Range("abpar").Offset(k - 1, l).Interior.ColorIndex = 0
+                Next l
+        End If
+        i = i + 1
+Loop
+
+'Deletes from Course "AC"
+
+i = 1
+Do While Worksheets("A+C").Range("acpar").Offset(i, 1) <> ""
+        If Worksheets("A+C").Range("acpar").Offset(i, 23) = feld Then
+                For j = 1 To 23
+                        Worksheets("A+C").Range("acpar").Offset(i, j) = ""
+                Next j
+                k = i + 1
+                Do While Worksheets("A+C").Range("acpar").Offset(k, 1) <> ""
+                        For l = 1 To 23
+                        Worksheets("A+C").Range("acpar").Offset(k - 1, l) = Worksheets("A+C").Range("acpar").Offset(k, l)
+                        Worksheets("A+C").Range("acpar").Offset(k - 1, l).Interior.ColorIndex = Worksheets("A+C").Range("acpar").Offset(k, l).Interior.ColorIndex
+                        Next l
+                k = k + 1
+                Loop
+                For l = 1 To 23
+                        Worksheets("A+C").Range("acpar").Offset(k - 1, l) = ""
+                        Worksheets("A+C").Range("acpar").Offset(k - 1, l).Interior.ColorIndex = 0
+                Next l
+        End If
+        i = i + 1
+Loop
+
+'Deletes from Course "BC"
+
+i = 1
+Do While Worksheets("B+C").Range("bcpar").Offset(i, 1) <> ""
+        If Worksheets("B+C").Range("bcpar").Offset(i, 23) = feld Then
+                For j = 1 To 23
+                        Worksheets("B+C").Range("bcpar").Offset(i, j) = ""
+                Next j
+                k = i + 1
+                Do While Worksheets("B+C").Range("bcpar").Offset(k, 1) <> ""
+                        For l = 1 To 23
+                        Worksheets("B+C").Range("bcpar").Offset(k - 1, l) = Worksheets("B+C").Range("bcpar").Offset(k, l)
+                        Worksheets("B+C").Range("bcpar").Offset(k - 1, l).Interior.ColorIndex = Worksheets("B+C").Range("bcpar").Offset(k, l).Interior.ColorIndex
+                        Next l
+                k = k + 1
+                Loop
+                For l = 1 To 23
+                        Worksheets("B+C").Range("bcpar").Offset(k - 1, l) = ""
+                        Worksheets("B+C").Range("bcpar").Offset(k - 1, l).Interior.ColorIndex = 0
+                Next l
+        End If
+        i = i + 1
+Loop
+
+End Sub
