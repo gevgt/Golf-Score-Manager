@@ -1,0 +1,881 @@
+Sub Schaltfläche3_Klicken()
+'Checks for awards
+
+Dim i As Integer
+Dim j As Integer
+Dim birdie As Integer
+Dim par As Integer
+Dim eagle As Integer
+Dim ass As Integer
+Dim worse As Integer
+Dim comeback As Integer
+
+'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA (Checks for awards in the "A" worksheet)
+
+i = 1
+Do While Worksheets("A").Range("apar").Offset(i, 1) <> ""
+        birdie = 0
+        par = 0
+        eagle = 0
+        ass = 0
+        worse = 0
+        comeback = 0
+        For j = 1 To 9
+                If Worksheets("A").Range("apar").Offset(i, j) = 1 Then
+                        ass = ass + 1
+                End If
+                If Worksheets("A").Range("apar").Offset(i, j) - Worksheets("A").Range("apar").Offset(0, j) = -2 Then
+                        eagle = eagle + 1
+                End If
+                If Worksheets("a").Range("apar").Offset(i, j) - Worksheets("A").Range("apar").Offset(0, j) = -1 Then
+                        birdie = birdie + 1
+                End If
+                If Worksheets("A").Range("apar").Offset(i, j) - Worksheets("A").Range("apar").Offset(0, j) = 0 Then
+                        par = par + 1
+                End If
+                If Worksheets("A").Range("apar").Offset(i, j) - Worksheets("A").Range("apar").Offset(0, j) > 0 Then
+                        worse = worse + 1
+                End If
+                If Worksheets("A").Range("apar").Offset(i, j) - Worksheets("A").Range("apar").Offset(0, j) > 0 And Worksheets("A").Range("apar").Offset(i, j + 1) - Worksheets("a").Range("apar").Offset(0, j + 1) < 0 Then
+                        comeback = comeback + 1
+                End If
+        Next j
+        
+                'Ass
+                
+                If Range("eawards").Offset(13) <> "x" Then
+                        If ass >= 1 Then
+                                Range("eawards").Offset(13) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: The Ass")
+                        End If
+                End If
+                
+                'eagle
+                
+                If Range("eawards").Offset(4) <> "x" Then
+                        If eagle >= 1 Then
+                                Range("eawards").Offset(4) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Eagle Eye")
+                        End If
+                End If
+        
+                'Birdie
+                
+                If Range("eawards").Offset(1) <> "x" Then
+                        If birdie >= 1 And birdie <= 2 Then
+                                Range("eawards").Offset(1) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Birdie Hunter Bronze")
+                        End If
+                End If
+                
+                If Range("eawards").Offset(2) <> "x" Then
+                        If birdie >= 3 And birdie <= 4 Then
+                                Range("eawards").Offset(2) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Birdie Hunter Silver")
+                        End If
+                End If
+                
+                If Range("eawards").Offset(3) <> "x" Then
+                        If birdie >= 5 Then
+                                Range("eawards").Offset(3) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Birdie Hunter Gold")
+                        End If
+                End If
+                
+                'par
+                
+                If Range("eawards").Offset(5) <> "x" Then
+                        If par >= 5 And par <= 7 Then
+                                Range("eawards").Offset(5) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Par Collector Bronze")
+                        End If
+                End If
+                
+                If Range("eawards").Offset(6) <> "x" Then
+                        If par >= 8 And par <= 11 Then
+                                Range("eawards").Offset(6) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Par Collector Silver")
+                        End If
+                End If
+                
+                If Range("eawards").Offset(7) <> "x" Then
+                        If par >= 12 Then
+                                Range("eawards").Offset(7) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Par Collector Gold")
+                        End If
+                End If
+                
+                'scratch golfer silver
+                
+                If Range("eawards").Offset(8) <> "x" Then
+                        If Worksheets("A").Range("atopar").Offset(i + 1) = 0 Then
+                                Range("eawards").Offset(8) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Scratch Golfer Silver")
+                        End If
+                End If
+                
+                'pro 9 loch
+                
+                 If Range("eawards").Offset(14) <> "x" Then
+                        If Worksheets("A").Range("atopar").Offset(i + 1) < 0 Then
+                                Range("eawards").Offset(14) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: The Pro Silver")
+                        End If
+                End If
+                
+                'constant 9 loch
+                
+                If Range("eawards").Offset(10) <> "x" Then
+                        If worse = 0 Then
+                                Range("eawards").Offset(10) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: The Constant Silver")
+                        End If
+                End If
+                
+                'comeback
+                
+                If Range("eawards").Offset(12) <> "x" Then
+                        If comeback > 0 Then
+                                Range("eawards").Offset(12) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: The Comeback")
+                        End If
+                End If
+    
+i = i + 1
+Loop
+                
+'scratch golfer gold
+
+                If Worksheets("A").Range("atopar").Offset(-1) < 0.5 And Worksheets("A").Range("atopar").Offset(-1) >= 0 And Worksheets("A").Range("atopar").Offset(-1) <> "" Then
+                        Range("eawards").Offset(9) = "x"
+                        MsgBox ("Congratiolations! You have completed the Challenge: Scratch Golfer Gold")
+                Else
+                        Range("eawards").Offset(9) = ""
+                End If
+
+
+'BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB (Checks for awards in the "B" worksheet)
+
+i = 1
+Do While Worksheets("B").Range("bpar").Offset(i, 1) <> ""
+        birdie = 0
+        par = 0
+        eagle = 0
+        ass = 0
+        worse = 0
+        comeback = 0
+        For j = 1 To 9
+                If Worksheets("B").Range("bpar").Offset(i, j) = 1 Then
+                        ass = ass + 1
+                End If
+                If Worksheets("B").Range("bpar").Offset(i, j) - Worksheets("B").Range("bpar").Offset(0, j) = -2 Then
+                        eagle = eagle + 1
+                End If
+                If Worksheets("B").Range("bpar").Offset(i, j) - Worksheets("B").Range("bpar").Offset(0, j) = -1 Then
+                        birdie = birdie + 1
+                End If
+                If Worksheets("B").Range("bpar").Offset(i, j) - Worksheets("B").Range("bpar").Offset(0, j) = 0 Then
+                        par = par + 1
+                End If
+                If Worksheets("B").Range("bpar").Offset(i, j) - Worksheets("B").Range("bpar").Offset(0, j) > 0 Then
+                        worse = worse + 1
+                End If
+                If Worksheets("B").Range("bpar").Offset(i, j) - Worksheets("B").Range("bpar").Offset(0, j) > 0 And Worksheets("B").Range("bpar").Offset(i, j + 1) - Worksheets("B").Range("bpar").Offset(0, j + 1) < 0 Then
+                        comeback = comeback + 1
+                End If
+        Next j
+        
+                'Ass
+                
+                If Range("eawards").Offset(13) <> "x" Then
+                        If ass >= 1 Then
+                                Range("eawards").Offset(13) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: The Ass")
+                        End If
+                End If
+                
+                'eagle
+                
+                If Range("eawards").Offset(4) <> "x" Then
+                        If eagle >= 1 Then
+                                Range("eawards").Offset(4) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Eagle Eye")
+                        End If
+                End If
+        
+                'Birdie
+                
+                If Range("eawards").Offset(1) <> "x" Then
+                        If birdie >= 1 And birdie <= 2 Then
+                                Range("eawards").Offset(1) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Birdie Hunter Bronze")
+                        End If
+                End If
+                
+                If Range("eawards").Offset(2) <> "x" Then
+                        If birdie >= 3 And birdie <= 4 Then
+                                Range("eawards").Offset(2) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Birdie Hunter Silver")
+                        End If
+                End If
+                
+                If Range("eawards").Offset(3) <> "x" Then
+                        If birdie >= 5 Then
+                                Range("eawards").Offset(3) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Birdie Hunter Gold")
+                        End If
+                End If
+                
+                'par
+                
+                If Range("eawards").Offset(5) <> "x" Then
+                        If par >= 5 And par <= 7 Then
+                                Range("eawards").Offset(5) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Par Collector Bronze")
+                        End If
+                End If
+                
+                If Range("eawards").Offset(6) <> "x" Then
+                        If par >= 8 And par <= 11 Then
+                                Range("eawards").Offset(6) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Par Collector Silver")
+                        End If
+                End If
+                
+                If Range("eawards").Offset(7) <> "x" Then
+                        If par >= 12 Then
+                                Range("eawards").Offset(7) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Par Collector Gold")
+                        End If
+                End If
+                
+                'scratch golfer silver
+                
+                If Range("eawards").Offset(8) <> "x" Then
+                        If Worksheets("B").Range("btopar").Offset(i + 1) = 0 Then
+                                Range("eawards").Offset(8) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Scratch Golfer Silver")
+                        End If
+                End If
+                
+                'pro 9 loch
+                
+                 If Range("eawards").Offset(14) <> "x" Then
+                        If Worksheets("B").Range("btopar").Offset(i + 1) < 0 Then
+                                Range("eawards").Offset(14) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: The Pro Silver")
+                        End If
+                End If
+                
+                'constant 9 loch
+                
+                If Range("eawards").Offset(10) <> "x" Then
+                        If worse = 0 Then
+                                Range("eawards").Offset(10) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: The Constant Silver")
+                        End If
+                End If
+                
+                'comeback
+                
+                If Range("eawards").Offset(12) <> "x" Then
+                        If comeback > 0 Then
+                                Range("eawards").Offset(12) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: The Comeback")
+                        End If
+                End If
+    
+i = i + 1
+Loop
+                
+'scratch golfer gold
+
+                If Worksheets("B").Range("btopar").Offset(-1) < 0.5 And Worksheets("B").Range("btopar").Offset(-1) >= 0 And Worksheets("B").Range("btopar").Offset(-1) <> "" Then
+                        Range("eawards").Offset(9) = "x"
+                        MsgBox ("Congratiolations! You have completed the Challenge: Scratch Golfer Gold")
+                Else
+                        Range("eawards").Offset(9) = ""
+                End If
+                
+                
+'CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC (Checks for awards in the "C" worksheet)
+
+i = 1
+Do While Worksheets("C").Range("cpar").Offset(i, 1) <> ""
+        birdie = 0
+        par = 0
+        eagle = 0
+        ass = 0
+        worse = 0
+        comeback = 0
+        For j = 1 To 9
+                If Worksheets("C").Range("cpar").Offset(i, j) = 1 Then
+                        ass = ass + 1
+                End If
+                If Worksheets("C").Range("cpar").Offset(i, j) - Worksheets("C").Range("cpar").Offset(0, j) = -2 Then
+                        eagle = eagle + 1
+                End If
+                If Worksheets("C").Range("cpar").Offset(i, j) - Worksheets("C").Range("cpar").Offset(0, j) = -1 Then
+                        birdie = birdie + 1
+                End If
+                If Worksheets("C").Range("cpar").Offset(i, j) - Worksheets("C").Range("cpar").Offset(0, j) = 0 Then
+                        par = par + 1
+                End If
+                If Worksheets("C").Range("cpar").Offset(i, j) - Worksheets("C").Range("cpar").Offset(0, j) > 0 Then
+                        worse = worse + 1
+                End If
+                If Worksheets("C").Range("cpar").Offset(i, j) - Worksheets("C").Range("cpar").Offset(0, j) > 0 And Worksheets("C").Range("cpar").Offset(i, j + 1) - Worksheets("C").Range("cpar").Offset(0, j + 1) < 0 Then
+                        comeback = comeback + 1
+                End If
+        Next j
+        
+                'Ass
+                
+                If Range("eawards").Offset(13) <> "x" Then
+                        If ass >= 1 Then
+                                Range("eawards").Offset(13) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: The Ass")
+                        End If
+                End If
+                
+                'eagle
+                
+                If Range("eawards").Offset(4) <> "x" Then
+                        If eagle >= 1 Then
+                                Range("eawards").Offset(4) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Eagle Eye")
+                        End If
+                End If
+        
+                'Birdie
+                
+                If Range("eawards").Offset(1) <> "x" Then
+                        If birdie >= 1 And birdie <= 2 Then
+                                Range("eawards").Offset(1) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Birdie Hunter Bronze")
+                        End If
+                End If
+                
+                If Range("eawards").Offset(2) <> "x" Then
+                        If birdie >= 3 And birdie <= 4 Then
+                                Range("eawards").Offset(2) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Birdie Hunter Silver")
+                        End If
+                End If
+                
+                If Range("eawards").Offset(3) <> "x" Then
+                        If birdie >= 5 Then
+                                Range("eawards").Offset(3) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Birdie Hunter Gold")
+                        End If
+                End If
+                
+                'par
+                
+                If Range("eawards").Offset(5) <> "x" Then
+                        If par >= 5 And par <= 7 Then
+                                Range("eawards").Offset(5) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Par Collector Bronze")
+                        End If
+                End If
+                
+                If Range("eawards").Offset(6) <> "x" Then
+                        If par >= 8 And par <= 11 Then
+                                Range("eawards").Offset(6) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Par Collector Silver")
+                        End If
+                End If
+                
+                If Range("eawards").Offset(7) <> "x" Then
+                        If par >= 12 Then
+                                Range("eawards").Offset(7) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Par Collector Gold")
+                        End If
+                End If
+                
+                'scratch golfer silver
+                
+                If Range("eawards").Offset(8) <> "x" Then
+                        If Worksheets("C").Range("ctopar").Offset(i + 1) = 0 Then
+                                Range("eawards").Offset(8) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Scratch Golfer Silver")
+                        End If
+                End If
+                
+                'pro 9 loch
+                
+                 If Range("eawards").Offset(14) <> "x" Then
+                        If Worksheets("C").Range("ctopar").Offset(i + 1) < 0 Then
+                                Range("eawards").Offset(14) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: The Pro Silver")
+                        End If
+                End If
+                
+                'constant 9 loch
+                
+                If Range("eawards").Offset(10) <> "x" Then
+                        If worse = 0 Then
+                                Range("eawards").Offset(10) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: The Constant Silver")
+                        End If
+                End If
+                
+                'comeback
+                
+                If Range("eawards").Offset(12) <> "x" Then
+                        If comeback > 0 Then
+                                Range("eawards").Offset(12) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: The Comeback")
+                        End If
+                End If
+    
+i = i + 1
+Loop
+                
+'scratch golfer gold
+
+                If Worksheets("C").Range("ctopar").Offset(-1) < 0.5 And Worksheets("C").Range("ctopar").Offset(-1) >= 0 And Worksheets("C").Range("ctopar").Offset(-1) <> "" Then
+                        Range("eawards").Offset(9) = "x"
+                        MsgBox ("Congratiolations! You have completed the Challenge: Scratch Golfer Gold")
+                Else
+                        Range("eawards").Offset(9) = ""
+                End If
+
+
+'ABABABABABABABABABABABABABABABABABABABABABAB (Checks for awards in the "AB" worksheets)
+
+i = 1
+
+Do While Worksheets("A+B").Range("abpar").Offset(i, 1) <> ""
+        ass = 0
+        eagle = 0
+        birdie = 0
+        par = 0
+        worse = 0
+        For j = 1 To 19
+        If i <> 10 Then
+                If Worksheets("A+B").Range("abpar").Offset(i, j) = 1 Then
+                        ass = ass + 1
+                End If
+                If Worksheets("A+B").Range("abpar").Offset(i, j) - Worksheets("A+B").Range("abpar").Offset(0, j) = -2 Then
+                        eagle = eagle + 1
+                End If
+                If Worksheets("A+B").Range("abpar").Offset(i, j) - Worksheets("A+B").Range("abpar").Offset(0, j) = -1 Then
+                        birdie = birdie + 1
+                End If
+                If Worksheets("A+B").Range("abpar").Offset(i, j) - Worksheets("A+B").Range("abpar").Offset(0, j) = 0 Then
+                        par = par + 1
+                End If
+                If Worksheets("A+B").Range("abpar").Offset(i, j) - Worksheets("A+B").Range("abpar").Offset(0, j) > 0 Then
+                        worse = worse + 1
+                End If
+                If Worksheets("A+B").Range("abpar").Offset(i, j) - Worksheets("A+B").Range("abpar").Offset(0, j) > 0 And Worksheets("A+B").Range("abpar").Offset(i, j + 1) - Worksheets("A+B").Range("abpar").Offset(0, j + 1) < 0 Then
+                        comeback = comeback + 1
+                End If
+        End If
+        Next j
+        
+                'Ass
+                
+                If Range("eawards").Offset(13) <> "x" Then
+                        If ass >= 1 Then
+                                Range("eawards").Offset(13) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: The Ass")
+                        End If
+                End If
+                
+                'eagle
+                
+                If Range("eawards").Offset(4) <> "x" Then
+                        If eagle >= 1 Then
+                                Range("eawards").Offset(4) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Eagle Eye")
+                        End If
+                End If
+        
+                'Birdie
+                
+                If Range("eawards").Offset(1) <> "x" Then
+                        If birdie >= 1 And birdie <= 2 Then
+                                Range("eawards").Offset(1) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Birdie Hunter Bronze")
+                        End If
+                End If
+                
+                If Range("eawards").Offset(2) <> "x" Then
+                        If birdie >= 3 And birdie <= 4 Then
+                                Range("eawards").Offset(2) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Birdie Hunter Silver")
+                        End If
+                End If
+                
+                If Range("eawards").Offset(3) <> "x" Then
+                        If birdie >= 5 Then
+                                Range("eawards").Offset(3) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Birdie Hunter Gold")
+                        End If
+                End If
+                
+                'par
+                
+                If Range("eawards").Offset(5) <> "x" Then
+                        If par >= 5 And par <= 7 Then
+                                Range("eawards").Offset(5) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Par Collector Bronze")
+                        End If
+                End If
+                
+                If Range("eawards").Offset(6) <> "x" Then
+                        If par >= 8 And par <= 11 Then
+                                Range("eawards").Offset(6) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Par Collector Silver")
+                        End If
+                End If
+                
+                If Range("eawards").Offset(7) <> "x" Then
+                        If par >= 12 Then
+                                Range("eawards").Offset(7) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Par Collector Gold")
+                        End If
+                End If
+                
+                'scratch golfer silver
+                
+                If Range("eawards").Offset(8) <> "x" Then
+                        If Worksheets("A+B").Range("abtopar").Offset(i + 1) = 0 Then
+                                Range("eawards").Offset(8) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Scratch Golfer Silver")
+                        End If
+                End If
+                
+                'pro 18 loch
+                
+                 If Range("eawards").Offset(15) <> "x" Then
+                        If Worksheets("A+B").Range("abtopar").Offset(i + 1) < 0 Then
+                                Range("eawards").Offset(15) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: The Pro Gold")
+                        End If
+                End If
+                
+                'constant 18 loch
+                
+                If Range("eawards").Offset(11) <> "x" Then
+                        If worse = 0 Then
+                                Range("eawards").Offset(11) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: The Constant Gold")
+                        End If
+                End If
+                
+                'comeback
+                
+                If Range("eawards").Offset(12) <> "x" Then
+                        If comeback > 0 Then
+                                Range("eawards").Offset(12) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: The Comeback")
+                        End If
+                End If
+    
+i = i + 1
+Loop
+                
+'scratch golfer gold
+
+                If Worksheets("A+B").Range("abtopar").Offset(-1) < 0.5 And Worksheets("A+B").Range("abtopar").Offset(-1) >= 0 And Worksheets("A+B").Range("abtopar").Offset(-1) <> "" Then
+                        Range("eawards").Offset(9) = "x"
+                        MsgBox ("Congratiolations! You have completed the Challenge: Scratch Golfer Gold")
+                Else
+                        Range("eawards").Offset(9) = ""
+                End If
+                
+                
+'ACACACACACACACACACACACACACACACACACACACAC (Checks for awards in the "AC" worksheet)
+
+i = 1
+
+Do While Worksheets("A+C").Range("acpar").Offset(i, 1) <> ""
+        ass = 0
+        eagle = 0
+        birdie = 0
+        par = 0
+        worse = 0
+        For j = 1 To 19
+        If i <> 10 Then
+                If Worksheets("A+C").Range("acpar").Offset(i, j) = 1 Then
+                        ass = ass + 1
+                End If
+                If Worksheets("A+C").Range("acpar").Offset(i, j) - Worksheets("A+C").Range("acpar").Offset(0, j) = -2 Then
+                        eagle = eagle + 1
+                End If
+                If Worksheets("A+C").Range("acpar").Offset(i, j) - Worksheets("A+C").Range("acpar").Offset(0, j) = -1 Then
+                        birdie = birdie + 1
+                End If
+                If Worksheets("A+C").Range("acpar").Offset(i, j) - Worksheets("A+C").Range("acpar").Offset(0, j) = 0 Then
+                        par = par + 1
+                End If
+                If Worksheets("A+C").Range("acpar").Offset(i, j) - Worksheets("A+C").Range("acpar").Offset(0, j) > 0 Then
+                        worse = worse + 1
+                End If
+                If Worksheets("A+C").Range("acpar").Offset(i, j) - Worksheets("A+C").Range("acpar").Offset(0, j) > 0 And Worksheets("A+C").Range("acpar").Offset(i, j + 1) - Worksheets("A+C").Range("acpar").Offset(0, j + 1) < 0 Then
+                        comeback = comeback + 1
+                End If
+        End If
+        Next j
+        
+                'Ass
+                
+                If Range("eawards").Offset(13) <> "x" Then
+                        If ass >= 1 Then
+                                Range("eawards").Offset(13) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: The Ass")
+                        End If
+                End If
+                
+                'eagle
+                
+                If Range("eawards").Offset(4) <> "x" Then
+                        If eagle >= 1 Then
+                                Range("eawards").Offset(4) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Eagle Eye")
+                        End If
+                End If
+        
+                'Birdie
+                
+                If Range("eawards").Offset(1) <> "x" Then
+                        If birdie >= 1 And birdie <= 2 Then
+                                Range("eawards").Offset(1) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Birdie Hunter Bronze")
+                        End If
+                End If
+                
+                If Range("eawards").Offset(2) <> "x" Then
+                        If birdie >= 3 And birdie <= 4 Then
+                                Range("eawards").Offset(2) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Birdie Hunter Silver")
+                        End If
+                End If
+                
+                If Range("eawards").Offset(3) <> "x" Then
+                        If birdie >= 5 Then
+                                Range("eawards").Offset(3) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Birdie Hunter Gold")
+                        End If
+                End If
+                
+                'par
+                
+                If Range("eawards").Offset(5) <> "x" Then
+                        If par >= 5 And par <= 7 Then
+                                Range("eawards").Offset(5) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Par Collector Bronze")
+                        End If
+                End If
+                
+                If Range("eawards").Offset(6) <> "x" Then
+                        If par >= 8 And par <= 11 Then
+                                Range("eawards").Offset(6) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Par Collector Silver")
+                        End If
+                End If
+                
+                If Range("eawards").Offset(7) <> "x" Then
+                        If par >= 12 Then
+                                Range("eawards").Offset(7) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Par Collector Gold")
+                        End If
+                End If
+                
+                'scratch golfer silver
+                
+                If Range("eawards").Offset(8) <> "x" Then
+                        If Worksheets("A+C").Range("actopar").Offset(i + 1) = 0 Then
+                                Range("eawards").Offset(8) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Scratch Golfer Silver")
+                        End If
+                End If
+                
+                'pro 18 loch
+                
+                 If Range("eawards").Offset(15) <> "x" Then
+                        If Worksheets("A+C").Range("actopar").Offset(i + 1) < 0 Then
+                                Range("eawards").Offset(15) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: The Pro Gold")
+                        End If
+                End If
+                
+                'constant 18 loch
+                
+                If Range("eawards").Offset(11) <> "x" Then
+                        If worse = 0 Then
+                                Range("eawards").Offset(11) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: The Constant Gold")
+                        End If
+                End If
+                
+                'comeback
+                
+                If Range("eawards").Offset(12) <> "x" Then
+                        If comeback > 0 Then
+                                Range("eawards").Offset(12) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: The Comeback")
+                        End If
+                End If
+    
+i = i + 1
+Loop
+                
+'scratch golfer gold
+
+                If Worksheets("A+C").Range("actopar").Offset(-1) < 0.5 And Worksheets("A+C").Range("actopar").Offset(-1) >= 0 And Worksheets("A+C").Range("actopar").Offset(-1) <> "" Then
+                        Range("eawards").Offset(9) = "x"
+                        MsgBox ("Congratiolations! You have completed the Challenge: Scratch Golfer Gold")
+                Else
+                        Range("eawards").Offset(9) = ""
+                End If
+                
+'BCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCB (Checks for awards in the "BC" worksheet)
+
+i = 1
+
+Do While Worksheets("B+C").Range("bcpar").Offset(i, 1) <> ""
+        ass = 0
+        eagle = 0
+        birdie = 0
+        par = 0
+        worse = 0
+        For j = 1 To 19
+        If i <> 10 Then
+                If Worksheets("B+C").Range("bcpar").Offset(i, j) = 1 Then
+                        ass = ass + 1
+                End If
+                If Worksheets("B+C").Range("bcpar").Offset(i, j) - Worksheets("B+C").Range("bcpar").Offset(0, j) = -2 Then
+                        eagle = eagle + 1
+                End If
+                If Worksheets("B+C").Range("bcpar").Offset(i, j) - Worksheets("B+C").Range("bcpar").Offset(0, j) = -1 Then
+                        birdie = birdie + 1
+                End If
+                If Worksheets("B+C").Range("bcpar").Offset(i, j) - Worksheets("B+C").Range("bcpar").Offset(0, j) = 0 Then
+                        par = par + 1
+                End If
+                If Worksheets("B+C").Range("bcpar").Offset(i, j) - Worksheets("B+C").Range("bcpar").Offset(0, j) > 0 Then
+                        worse = worse + 1
+                End If
+                If Worksheets("B+C").Range("bcpar").Offset(i, j) - Worksheets("B+C").Range("bcpar").Offset(0, j) > 0 And Worksheets("B+C").Range("bcpar").Offset(i, j + 1) - Worksheets("B+C").Range("bcpar").Offset(0, j + 1) < 0 Then
+                        comeback = comeback + 1
+                End If
+        End If
+        Next j
+        
+                'Ass
+                
+                If Range("eawards").Offset(13) <> "x" Then
+                        If ass >= 1 Then
+                                Range("eawards").Offset(13) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: The Ass")
+                        End If
+                End If
+                
+                'eagle
+                
+                If Range("eawards").Offset(4) <> "x" Then
+                        If eagle >= 1 Then
+                                Range("eawards").Offset(4) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Eagle Eye")
+                        End If
+                End If
+        
+                'Birdie
+                
+                If Range("eawards").Offset(1) <> "x" Then
+                        If birdie >= 1 And birdie <= 2 Then
+                                Range("eawards").Offset(1) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Birdie Hunter Bronze")
+                        End If
+                End If
+                
+                If Range("eawards").Offset(2) <> "x" Then
+                        If birdie >= 3 And birdie <= 4 Then
+                                Range("eawards").Offset(2) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Birdie Hunter Silver")
+                        End If
+                End If
+                
+                If Range("eawards").Offset(3) <> "x" Then
+                        If birdie >= 5 Then
+                                Range("eawards").Offset(3) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Birdie Hunter Gold")
+                        End If
+                End If
+                
+                'par
+                
+                If Range("eawards").Offset(5) <> "x" Then
+                        If par >= 5 And par <= 7 Then
+                                Range("eawards").Offset(5) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Par Collector Bronze")
+                        End If
+                End If
+                
+                If Range("eawards").Offset(6) <> "x" Then
+                        If par >= 8 And par <= 11 Then
+                                Range("eawards").Offset(6) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Par Collector Silver")
+                        End If
+                End If
+                
+                If Range("eawards").Offset(7) <> "x" Then
+                        If par >= 12 Then
+                                Range("eawards").Offset(7) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Par Collector Gold")
+                        End If
+                End If
+                
+                'scratch golfer silver
+                
+                If Range("eawards").Offset(8) <> "x" Then
+                        If Worksheets("B+C").Range("bctopar").Offset(i + 1) = 0 Then
+                                Range("eawards").Offset(8) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: Scratch Golfer Silver")
+                        End If
+                End If
+                
+                'pro 18 loch
+                
+                 If Range("eawards").Offset(15) <> "x" Then
+                        If Worksheets("B+C").Range("bctopar").Offset(i + 1) < 0 Then
+                                Range("eawards").Offset(15) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: The Pro Silver")
+                        End If
+                End If
+                
+                'constant 18 loch
+                
+                If Range("eawards").Offset(11) <> "x" Then
+                        If worse = 0 Then
+                                Range("eawards").Offset(11) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: The Constant Silver")
+                        End If
+                End If
+                
+                'comeback
+                
+                If Range("eawards").Offset(12) <> "x" Then
+                        If comeback > 0 Then
+                                Range("eawards").Offset(12) = "x"
+                                MsgBox ("Congratiolations! You have completed the Challenge: The Comeback")
+                        End If
+                End If
+    
+i = i + 1
+Loop
+                
+'scratch golfer gold
+
+                If Worksheets("B+C").Range("bctopar").Offset(-1) < 0.5 And Worksheets("B+C").Range("bctopar").Offset(-1) >= 0 And Worksheets("B+C").Range("bctopar").Offset(-1) <> "" Then
+                        Range("eawards").Offset(9) = "x"
+                        MsgBox ("Congratiolations! You have completed the Challenge: Scratch Golfer Gold")
+                Else
+                        Range("eawards").Offset(9) = ""
+                End If
+
+End Sub
