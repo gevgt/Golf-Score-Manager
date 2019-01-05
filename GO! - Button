@@ -1,0 +1,1022 @@
+Sub Tabelle1_Schaltfläche1_Klicken()
+'Writes your score in the according worksheet
+
+Dim i As Integer
+Dim j As Integer
+Dim k As Integer
+Dim l As Integer
+Dim datum As Boolean
+Dim course As Boolean
+Dim mb1 As Boolean
+
+
+i = 0
+k = 0
+l = 0
+datum = True
+course = False
+mb1 = False
+
+'checks if your inputs are correct
+If Range("escore").Offset(1) <> "" Then
+    If Range("edate").Offset(0, 1) = "" Then
+        MsgBox ("Date is missing!")
+        datum = False
+    End If
+End If
+
+If Range("escore").Offset(1) <> "" Then
+    If Range("ecourse").Offset(0, 1) = "" Then
+        MsgBox ("Course is missing!")
+        mb1 = True
+    End If
+    If Range("ecourse").Offset(0, 1) = "a" Then
+        course = True
+    End If
+    If Range("ecourse").Offset(0, 1) = "b" Then
+        course = True
+    End If
+    If Range("ecourse").Offset(0, 1) = "c" Then
+        course = True
+    End If
+    If Range("ecourse").Offset(0, 1) = "ab" Then
+        course = True
+    End If
+    If Range("ecourse").Offset(0, 1) = "ac" Then
+        course = True
+    End If
+    If Range("ecourse").Offset(0, 1) = "bc" Then
+        course = True
+    End If
+    If course = False And mb1 = False Then
+        MsgBox ("Course could not be found! Type like: a or ac")
+    End If
+End If
+
+If datum = True And course = True Then
+
+'writes your score in the worksheet "A", "C" and "A+C"
+If UCase(Range("ecourse").Offset(0, 1)) = UCase("ac") Then
+        Do While Worksheets("A+C").Range("acpar").Offset(i, 1) <> ""
+        i = i + 1
+        Loop
+        
+        Do While Worksheets("C").Range("cpar").Offset(k, 1) <> ""
+        k = k + 1
+        Loop
+        
+        Do While Worksheets("A").Range("apar").Offset(l, 1) <> ""
+        l = l + 1
+        Loop
+        
+        For j = 1 To 9
+        Worksheets("A+C").Range("acpar").Offset(i, j) = Range("escore").Offset(j)
+        Worksheets("C").Range("cpar").Offset(k, j) = Range("escore").Offset(j + 9)
+        Worksheets("A").Range("apar").Offset(l, j) = Range("escore").Offset(j)
+        Next j
+        For j = 10 To 18
+        Worksheets("A+C").Range("acpar").Offset(i, j + 1) = Range("escore").Offset(j)
+        Next j
+        Worksheets("A+C").Range("acdate").Offset(i + 1) = Range("edate").Offset(0, 1)
+        Worksheets("C").Range("cdate").Offset(k + 1) = Range("edate").Offset(0, 1)
+        Worksheets("A").Range("adate").Offset(l + 1) = Range("edate").Offset(0, 1)
+End If
+
+
+'writes your score in the worksheets "A", "B" and "A+B"
+i = 0
+k = 0
+l = 0
+If UCase(Range("ecourse").Offset(0, 1)) = UCase("ab") Then
+        Do While Worksheets("A+B").Range("abpar").Offset(i, 1) <> ""
+        i = i + 1
+        Loop
+        
+        Do While Worksheets("A").Range("apar").Offset(k, 1) <> ""
+        k = k + 1
+        Loop
+        
+        Do While Worksheets("B").Range("bpar").Offset(l, 1) <> ""
+        l = l + 1
+        Loop
+        
+        For j = 1 To 9
+        Worksheets("A+B").Range("abpar").Offset(i, j) = Range("escore").Offset(j)
+        Worksheets("A").Range("apar").Offset(k, j) = Range("escore").Offset(j)
+        Worksheets("B").Range("bpar").Offset(l, j) = Range("escore").Offset(j + 9)
+        Next j
+        For j = 10 To 18
+        Worksheets("A+B").Range("abpar").Offset(i, j + 1) = Range("escore").Offset(j)
+        Next j
+        Worksheets("A+B").Range("abdate").Offset(i + 1) = Range("edate").Offset(0, 1)
+        Worksheets("A").Range("adate").Offset(k + 1) = Range("edate").Offset(0, 1)
+        Worksheets("B").Range("bdate").Offset(l + 1) = Range("edate").Offset(0, 1)
+End If
+
+
+'writes your score in the worksheets "B", "C" and "B+C"
+i = 0
+k = 0
+l = 0
+If UCase(Range("ecourse").Offset(0, 1)) = UCase("bc") Then
+        Do While Worksheets("B+C").Range("bcpar").Offset(i, 1) <> ""
+        i = i + 1
+        Loop
+        
+        Do While Worksheets("B").Range("bpar").Offset(k, 1) <> ""
+        k = k + 1
+        Loop
+        
+        Do While Worksheets("C").Range("cpar").Offset(l, 1) <> ""
+        l = l + 1
+        Loop
+        
+        For j = 1 To 9
+        Worksheets("B+C").Range("bcpar").Offset(i, j) = Range("escore").Offset(j)
+        Worksheets("B").Range("bpar").Offset(k, j) = Range("escore").Offset(j)
+        Worksheets("C").Range("cpar").Offset(l, j) = Range("escore").Offset(j + 9)
+        Next j
+        For j = 10 To 18
+        Worksheets("B+C").Range("bcpar").Offset(i, j + 1) = Range("escore").Offset(j)
+        Next j
+        Worksheets("B+C").Range("bcdate").Offset(i + 1) = Range("edate").Offset(0, 1)
+        Worksheets("B").Range("bdate").Offset(k + 1) = Range("edate").Offset(0, 1)
+        Worksheets("C").Range("cdate").Offset(l + 1) = Range("edate").Offset(0, 1)
+End If
+
+
+'writes your score in the worksheets "A"
+i = 0
+If UCase(Range("ecourse").Offset(0, 1)) = UCase("a") Then
+        Do While Worksheets("A").Range("apar").Offset(i, 1) <> ""
+        i = i + 1
+        Loop
+        
+        For j = 1 To 9
+        Worksheets("A").Range("apar").Offset(i, j) = Range("escore").Offset(j)
+        Next j
+        Worksheets("A").Range("adate").Offset(i + 1) = Range("edate").Offset(0, 1)
+End If
+
+
+'writes your score in the worksheets "B"
+i = 0
+If UCase(Range("ecourse").Offset(0, 1)) = UCase("b") Then
+        Do While Worksheets("B").Range("bpar").Offset(i, 1) <> ""
+        i = i + 1
+        Loop
+        
+        For j = 1 To 9
+        Worksheets("B").Range("bpar").Offset(i, j) = Range("escore").Offset(j)
+        Next j
+        Worksheets("B").Range("bdate").Offset(i + 1) = Range("edate").Offset(0, 1)
+End If
+
+
+'writes your score in the worksheets "C"
+i = 0
+If UCase(Range("ecourse").Offset(0, 1)) = UCase("c") Then
+        Do While Worksheets("C").Range("cpar").Offset(i, 1) <> ""
+        i = i + 1
+        Loop
+        
+        For j = 1 To 9
+        Worksheets("C").Range("cpar").Offset(i, j) = Range("escore").Offset(j)
+        Next j
+        Worksheets("C").Range("cdate").Offset(i + 1) = Range("edate").Offset(0, 1)
+End If
+
+For i = 1 To 18
+Range("escore").Offset(i) = ""
+Next i
+Range("ecourse").Offset(0, 1) = ""
+Range("edate").Offset(0, 1) = ""
+
+End If
+
+
+
+'For "A+B"
+Dim summe As Integer
+Dim e1 As Integer
+Dim e2 As Integer
+Dim e3 As Integer
+Dim e4 As Integer
+Dim e5 As Integer
+Dim o As Integer
+
+If Worksheets("A+B").Range("abpar").Offset(1, 1) <> "" Then
+
+e1 = 0
+e2 = 0
+e3 = 0
+e4 = 0
+e5 = 0
+
+
+'matches the cells the appropriate colour
+i = 1
+Do While Worksheets("A+B").Range("abpar").Offset(i, 1) <> ""
+    For j = 1 To 9
+            
+            If Worksheets("A+B").Range("abpar").Offset(i, j) - Worksheets("A+B").Range("abpar").Offset(0, j) = -2 Then
+                e1 = e1 + 1
+                Worksheets("A+B").Range("abpar").Offset(i, j).Interior.Color = RGB(255, 188, 24)
+            End If
+            If Worksheets("A+B").Range("abpar").Offset(i, j) - Worksheets("A+B").Range("abpar").Offset(0, j) = -1 Then
+                e2 = e2 + 1
+                Worksheets("A+B").Range("abpar").Offset(i, j).Interior.Color = RGB(194, 0, 14)
+            End If
+            If Worksheets("A+B").Range("abpar").Offset(i, j) - Worksheets("A+B").Range("abpar").Offset(0, j) = 0 Then
+                e3 = e3 + 1
+                Worksheets("A+B").Range("abpar").Offset(i, j).Interior.Color = RGB(255, 255, 255)
+            End If
+            If Worksheets("A+B").Range("abpar").Offset(i, j) - Worksheets("A+B").Range("abpar").Offset(0, j) = 1 Then
+                e4 = e4 + 1
+                Worksheets("A+B").Range("abpar").Offset(i, j).Interior.Color = RGB(11, 95, 174)
+            End If
+            If Worksheets("A+B").Range("abpar").Offset(i, j) - Worksheets("A+B").Range("abpar").Offset(0, j) > 1 Then
+                e5 = e5 + 1
+                Worksheets("A+B").Range("abpar").Offset(i, j).Interior.Color = RGB(47, 63, 104)
+            End If
+    Next j
+    
+    For j = 11 To 19
+            
+            If Worksheets("A+B").Range("abpar").Offset(i, j) - Worksheets("A+B").Range("abpar").Offset(0, j) = -2 Then
+                e1 = e1 + 1
+                Worksheets("A+B").Range("abpar").Offset(i, j).Interior.Color = RGB(255, 188, 24)
+            End If
+            If Worksheets("A+B").Range("abpar").Offset(i, j) - Worksheets("A+B").Range("abpar").Offset(0, j) = -1 Then
+                e2 = e2 + 1
+                Worksheets("A+B").Range("abpar").Offset(i, j).Interior.Color = RGB(194, 0, 14)
+            End If
+            If Worksheets("A+B").Range("abpar").Offset(i, j) - Worksheets("A+B").Range("abpar").Offset(0, j) = 0 Then
+                e3 = e3 + 1
+                Worksheets("A+B").Range("abpar").Offset(i, j).Interior.Color = RGB(255, 255, 255)
+            End If
+            If Worksheets("A+B").Range("abpar").Offset(i, j) - Worksheets("A+B").Range("abpar").Offset(0, j) = 1 Then
+                e4 = e4 + 1
+                Worksheets("A+B").Range("abpar").Offset(i, j).Interior.Color = RGB(11, 95, 174)
+            End If
+            If Worksheets("A+B").Range("abpar").Offset(i, j) - Worksheets("A+B").Range("abpar").Offset(0, j) > 1 Then
+                e5 = e5 + 1
+                Worksheets("A+B").Range("abpar").Offset(i, j).Interior.Color = RGB(47, 63, 104)
+            End If
+    Next j
+            
+    i = i + 1
+Loop
+
+'percentage of played eagles, birdies...
+o = (i - 1) * 18
+
+Range("abseagle") = e1 / o
+Range("absbirdie") = e2 / o
+Range("abspar") = e3 / o
+Range("absbogey") = e4 / o
+Range("absworse") = e5 / o
+
+
+
+'ranks the holes according to your average score on a certain hole
+Dim rang() As String
+ReDim rang(18)
+Dim max As Double
+Dim b As Boolean
+Dim nr As String
+
+
+
+For i = 1 To 18
+        max = -5
+        
+        For j = 1 To 19
+                b = False
+                If Worksheets("A+B").Range("abhole").Offset(0, j) <> "IN" Then
+                        For k = 1 To 18
+                                If rang(k) = "A" & Worksheets("A+B").Range("abhole").Offset(0, j) Then
+                                    b = True
+                                End If
+                                If rang(k) = "B" & Worksheets("A+B").Range("abhole").Offset(0, j) - 9 Then
+                                    b = True
+                                End If
+                        Next k
+                
+                    If Worksheets("A+B").Range("abschnitt").Offset(0, j) - Worksheets("A+B").Range("abpar").Offset(0, j) > max And b = False Then
+                        max = Worksheets("A+B").Range("abschnitt").Offset(0, j) - Worksheets("A+B").Range("abpar").Offset(0, j)
+                        Select Case Worksheets("A+B").Range("abhole").Offset(0, j)
+                                Case Is <= 9
+                                        rang(i) = "A" & Worksheets("A+B").Range("abhole").Offset(0, j)
+                                Case Is >= 10
+                                        rang(i) = "B" & Worksheets("A+B").Range("abhole").Offset(0, j) - 9
+                        End Select
+                    End If
+                End If
+        Next j
+        
+Next i
+
+For k = 1 To 18
+Worksheets("A+B").Range("abrhole").Offset(k) = rang(k)
+Worksheets("A+B").Range("abrhole").Offset(k, -1) = k
+Next k
+
+
+
+Dim m As Integer
+Dim inn As Integer
+Dim out As Integer
+Dim score As Integer
+Dim topar As Integer
+
+'sums up your score and calculates your average score
+topar = 0
+k = 1
+Do While Worksheets("A+B").Range("abpar").Offset(k, 1) <> ""
+        inn = 0
+        out = 0
+        For l = 1 To 9
+                inn = inn + Worksheets("A+B").Range("abpar").Offset(k, l)
+        Next l
+        For m = 11 To 19
+                out = out + Worksheets("A+B").Range("abpar").Offset(k, m)
+        Next m
+        Worksheets("A+B").Range("abin").Offset(k + 1) = inn
+        Worksheets("A+B").Range("about").Offset(k + 1) = out
+        Worksheets("A+B").Range("abtotal").Offset(k + 1) = inn + out
+        Worksheets("A+B").Range("abtotal").Offset(k + 1, 1) = Worksheets("A+B").Range("abtotal").Offset(k + 1) - Worksheets("A+B").Range("abtotal").Offset(1)
+        topar = topar + Worksheets("A+B").Range("abtotal").Offset(k + 1, 1)
+        k = k + 1
+Loop
+Worksheets("A+B").Range("abtotal").Offset(1, 1) = topar
+
+
+For i = 1 To 22
+        summe = 0
+        j = 1
+        Do While Worksheets("A+B").Range("abpar").Offset(j, 1) <> ""
+                summe = summe + Worksheets("A+B").Range("abpar").Offset(j, i)
+                j = j + 1
+        Loop
+        Worksheets("A+B").Range("abschnitt").Offset(0, i) = summe / (j - 1)
+Next i
+End If
+
+
+
+
+
+
+
+'For A+C
+If Worksheets("A+C").Range("acpar").Offset(1, 1) <> "" Then
+
+e1 = 0
+e2 = 0
+e3 = 0
+e4 = 0
+e5 = 0
+
+
+i = 1
+Do While Worksheets("A+C").Range("acpar").Offset(i, 1) <> ""
+    For j = 1 To 9
+            
+            If Worksheets("A+C").Range("acpar").Offset(i, j) - Worksheets("A+C").Range("acpar").Offset(0, j) = -2 Then
+                e1 = e1 + 1
+                Worksheets("A+C").Range("acpar").Offset(i, j).Interior.Color = RGB(255, 188, 24)
+            End If
+            If Worksheets("A+C").Range("acpar").Offset(i, j) - Worksheets("A+C").Range("acpar").Offset(0, j) = -1 Then
+                e2 = e2 + 1
+                Worksheets("A+C").Range("acpar").Offset(i, j).Interior.Color = RGB(194, 0, 14)
+            End If
+            If Worksheets("A+C").Range("acpar").Offset(i, j) - Worksheets("A+C").Range("acpar").Offset(0, j) = 0 Then
+                e3 = e3 + 1
+                Worksheets("A+C").Range("acpar").Offset(i, j).Interior.Color = RGB(255, 255, 255)
+            End If
+            If Worksheets("A+C").Range("acpar").Offset(i, j) - Worksheets("A+C").Range("acpar").Offset(0, j) = 1 Then
+                e4 = e4 + 1
+                Worksheets("A+C").Range("acpar").Offset(i, j).Interior.Color = RGB(11, 95, 174)
+            End If
+            If Worksheets("A+C").Range("acpar").Offset(i, j) - Worksheets("A+C").Range("acpar").Offset(0, j) > 1 Then
+                e5 = e5 + 1
+                Worksheets("A+C").Range("acpar").Offset(i, j).Interior.Color = RGB(47, 63, 104)
+            End If
+    Next j
+    
+    For j = 11 To 19
+            
+            If Worksheets("A+C").Range("acpar").Offset(i, j) - Worksheets("A+C").Range("acpar").Offset(0, j) = -2 Then
+                e1 = e1 + 1
+                Worksheets("A+C").Range("acpar").Offset(i, j).Interior.Color = RGB(255, 188, 24)
+            End If
+            If Worksheets("A+C").Range("acpar").Offset(i, j) - Worksheets("A+C").Range("acpar").Offset(0, j) = -1 Then
+                e2 = e2 + 1
+                Worksheets("A+C").Range("acpar").Offset(i, j).Interior.Color = RGB(194, 0, 14)
+            End If
+            If Worksheets("A+C").Range("acpar").Offset(i, j) - Worksheets("A+C").Range("acpar").Offset(0, j) = 0 Then
+                e3 = e3 + 1
+                Worksheets("A+C").Range("acpar").Offset(i, j).Interior.Color = RGB(255, 255, 255)
+            End If
+            If Worksheets("A+C").Range("acpar").Offset(i, j) - Worksheets("A+C").Range("acpar").Offset(0, j) = 1 Then
+                e4 = e4 + 1
+                Worksheets("A+C").Range("acpar").Offset(i, j).Interior.Color = RGB(11, 95, 174)
+            End If
+            If Worksheets("A+C").Range("acpar").Offset(i, j) - Worksheets("A+C").Range("acpar").Offset(0, j) > 1 Then
+                e5 = e5 + 1
+                Worksheets("A+C").Range("acpar").Offset(i, j).Interior.Color = RGB(47, 63, 104)
+            End If
+    Next j
+            
+    i = i + 1
+Loop
+
+o = (i - 1) * 18
+
+Range("acseagle") = e1 / o
+Range("acsbirdie") = e2 / o
+Range("acspar") = e3 / o
+Range("acsbogey") = e4 / o
+Range("acsworse") = e5 / o
+
+
+
+
+ReDim rang(18)
+
+
+
+For i = 1 To 18
+        max = -5
+        
+        For j = 1 To 19
+                b = False
+                If Worksheets("A+C").Range("achole").Offset(0, j) <> "IN" Then
+                        For k = 1 To 18
+                                If rang(k) = "A" & Worksheets("A+C").Range("achole").Offset(0, j) Then
+                                    b = True
+                                End If
+                                If rang(k) = "C" & Worksheets("A+C").Range("achole").Offset(0, j) - 9 Then
+                                    b = True
+                                End If
+                        Next k
+                
+                    If Worksheets("A+C").Range("acschnitt").Offset(0, j) - Worksheets("A+C").Range("acpar").Offset(0, j) > max And b = False Then
+                        max = Worksheets("A+C").Range("acschnitt").Offset(0, j) - Worksheets("A+C").Range("acpar").Offset(0, j)
+                        Select Case Worksheets("A+C").Range("achole").Offset(0, j)
+                                Case Is <= 9
+                                        rang(i) = "A" & Worksheets("A+C").Range("achole").Offset(0, j)
+                                Case Is >= 10
+                                        rang(i) = "C" & Worksheets("A+C").Range("achole").Offset(0, j) - 9
+                        End Select
+                    End If
+                End If
+        Next j
+        
+Next i
+
+For k = 1 To 18
+Worksheets("A+C").Range("acrhole").Offset(k) = rang(k)
+Worksheets("A+C").Range("acrhole").Offset(k, -1) = k
+Next k
+
+
+
+topar = 0
+k = 1
+Do While Worksheets("A+C").Range("acpar").Offset(k, 1) <> ""
+        inn = 0
+        out = 0
+        For l = 1 To 9
+                inn = inn + Worksheets("A+C").Range("acpar").Offset(k, l)
+        Next l
+        For m = 11 To 19
+                out = out + Worksheets("A+C").Range("acpar").Offset(k, m)
+        Next m
+        Worksheets("A+C").Range("acin").Offset(k + 1) = inn
+        Worksheets("A+C").Range("acout").Offset(k + 1) = out
+        Worksheets("A+C").Range("actotal").Offset(k + 1) = inn + out
+        Worksheets("A+C").Range("actotal").Offset(k + 1, 1) = Worksheets("A+C").Range("actotal").Offset(k + 1) - Worksheets("A+C").Range("actotal").Offset(1)
+        topar = topar + Worksheets("A+C").Range("actotal").Offset(k + 1, 1)
+        k = k + 1
+Loop
+Worksheets("A+C").Range("actotal").Offset(1, 1) = topar
+
+
+For i = 1 To 22
+        summe = 0
+        j = 1
+        Do While Worksheets("A+C").Range("acpar").Offset(j, 1) <> ""
+                summe = summe + Worksheets("A+C").Range("acpar").Offset(j, i)
+                j = j + 1
+        Loop
+        Worksheets("A+C").Range("acschnitt").Offset(0, i) = summe / (j - 1)
+Next i
+End If
+
+
+
+
+
+
+
+'For B+C
+If Worksheets("B+C").Range("bcpar").Offset(1, 1) <> "" Then
+
+e1 = 0
+e2 = 0
+e3 = 0
+e4 = 0
+e5 = 0
+
+
+i = 1
+Do While Worksheets("B+C").Range("bcpar").Offset(i, 1) <> ""
+    For j = 1 To 9
+            
+            If Worksheets("B+C").Range("bcpar").Offset(i, j) - Worksheets("B+C").Range("bcpar").Offset(0, j) = -2 Then
+                e1 = e1 + 1
+                Worksheets("B+C").Range("bcpar").Offset(i, j).Interior.Color = RGB(255, 188, 24)
+            End If
+            If Worksheets("B+C").Range("bcpar").Offset(i, j) - Worksheets("B+C").Range("bcpar").Offset(0, j) = -1 Then
+                e2 = e2 + 1
+                Worksheets("B+C").Range("bcpar").Offset(i, j).Interior.Color = RGB(194, 0, 14)
+            End If
+            If Worksheets("B+C").Range("bcpar").Offset(i, j) - Worksheets("B+C").Range("bcpar").Offset(0, j) = 0 Then
+                e3 = e3 + 1
+                Worksheets("B+C").Range("bcpar").Offset(i, j).Interior.Color = RGB(255, 255, 255)
+            End If
+            If Worksheets("B+C").Range("bcpar").Offset(i, j) - Worksheets("B+C").Range("bcpar").Offset(0, j) = 1 Then
+                e4 = e4 + 1
+                Worksheets("B+C").Range("bcpar").Offset(i, j).Interior.Color = RGB(11, 95, 174)
+            End If
+            If Worksheets("B+C").Range("bcpar").Offset(i, j) - Worksheets("B+C").Range("bcpar").Offset(0, j) > 1 Then
+                e5 = e5 + 1
+                Worksheets("B+C").Range("bcpar").Offset(i, j).Interior.Color = RGB(47, 63, 104)
+            End If
+    Next j
+    
+    For j = 11 To 19
+            
+            If Worksheets("B+C").Range("bcpar").Offset(i, j) - Worksheets("B+C").Range("bcpar").Offset(0, j) = -2 Then
+                e1 = e1 + 1
+                Worksheets("B+C").Range("bcpar").Offset(i, j).Interior.Color = RGB(255, 188, 24)
+            End If
+            If Worksheets("B+C").Range("bcpar").Offset(i, j) - Worksheets("B+C").Range("bcpar").Offset(0, j) = -1 Then
+                e2 = e2 + 1
+                Worksheets("B+C").Range("bcpar").Offset(i, j).Interior.Color = RGB(194, 0, 14)
+            End If
+            If Worksheets("B+C").Range("bcpar").Offset(i, j) - Worksheets("B+C").Range("bcpar").Offset(0, j) = 0 Then
+                e3 = e3 + 1
+                Worksheets("B+C").Range("bcpar").Offset(i, j).Interior.Color = RGB(255, 255, 255)
+            End If
+            If Worksheets("B+C").Range("bcpar").Offset(i, j) - Worksheets("B+C").Range("bcpar").Offset(0, j) = 1 Then
+                e4 = e4 + 1
+                Worksheets("B+C").Range("bcpar").Offset(i, j).Interior.Color = RGB(11, 95, 174)
+            End If
+            If Worksheets("B+C").Range("bcpar").Offset(i, j) - Worksheets("B+C").Range("bcpar").Offset(0, j) > 1 Then
+                e5 = e5 + 1
+                Worksheets("B+C").Range("bcpar").Offset(i, j).Interior.Color = RGB(47, 63, 104)
+            End If
+    Next j
+            
+    i = i + 1
+Loop
+
+o = (i - 1) * 18
+
+Range("bcseagle") = e1 / o
+Range("bcsbirdie") = e2 / o
+Range("bcspar") = e3 / o
+Range("bcsbogey") = e4 / o
+Range("bcsworse") = e5 / o
+
+
+
+
+
+ReDim rang(18)
+
+
+
+For i = 1 To 18
+        max = -5
+        
+        For j = 1 To 19
+                b = False
+                If Worksheets("B+C").Range("bchole").Offset(0, j) <> "IN" Then
+                        For k = 1 To 18
+                                If rang(k) = "B" & Worksheets("B+C").Range("bchole").Offset(0, j) Then
+                                    b = True
+                                End If
+                                If rang(k) = "C" & Worksheets("B+C").Range("bchole").Offset(0, j) - 9 Then
+                                    b = True
+                                End If
+                        Next k
+                
+                    If Worksheets("B+C").Range("bcschnitt").Offset(0, j) - Worksheets("B+C").Range("bcpar").Offset(0, j) > max And b = False Then
+                        max = Worksheets("B+C").Range("bcschnitt").Offset(0, j) - Worksheets("B+C").Range("bcpar").Offset(0, j)
+                        Select Case Worksheets("B+C").Range("bchole").Offset(0, j)
+                                Case Is <= 9
+                                        rang(i) = "B" & Worksheets("B+C").Range("bchole").Offset(0, j)
+                                Case Is >= 10
+                                        rang(i) = "C" & Worksheets("B+C").Range("bchole").Offset(0, j) - 9
+                        End Select
+                    End If
+                End If
+        Next j
+        
+Next i
+
+For k = 1 To 18
+Worksheets("B+C").Range("bcrhole").Offset(k) = rang(k)
+Worksheets("B+C").Range("bcrhole").Offset(k, -1) = k
+Next k
+
+
+
+topar = 0
+k = 1
+Do While Worksheets("B+C").Range("bcpar").Offset(k, 1) <> ""
+        inn = 0
+        out = 0
+        For l = 1 To 9
+                inn = inn + Worksheets("B+C").Range("bcpar").Offset(k, l)
+        Next l
+        For m = 11 To 19
+                out = out + Worksheets("B+C").Range("bcpar").Offset(k, m)
+        Next m
+        Worksheets("B+C").Range("bcin").Offset(k + 1) = inn
+        Worksheets("B+C").Range("bcout").Offset(k + 1) = out
+        Worksheets("B+C").Range("bctotal").Offset(k + 1) = inn + out
+        Worksheets("B+C").Range("bctotal").Offset(k + 1, 1) = Worksheets("B+C").Range("bctotal").Offset(k + 1) - Worksheets("B+C").Range("bctotal").Offset(1)
+        topar = topar + Worksheets("B+C").Range("bctotal").Offset(k + 1, 1)
+        k = k + 1
+Loop
+Worksheets("B+C").Range("bctotal").Offset(1, 1) = topar
+
+
+For i = 1 To 22
+        summe = 0
+        j = 1
+        Do While Worksheets("B+C").Range("bcpar").Offset(j, 1) <> ""
+                summe = summe + Worksheets("B+C").Range("bcpar").Offset(j, i)
+                j = j + 1
+        Loop
+        Worksheets("B+C").Range("bcschnitt").Offset(0, i) = summe / (j - 1)
+Next i
+End If
+
+
+
+
+
+
+
+
+
+'For A
+If Worksheets("A").Range("apar").Offset(1, 1) <> "" Then
+
+i = 1
+Do While Worksheets("A").Range("apar").Offset(i, 1) <> ""
+        summe = 0
+        For j = 1 To 9
+                summe = summe + Worksheets("A").Range("apar").Offset(i, j)
+        Next j
+        Worksheets("A").Range("atotal").Offset(i + 1) = summe
+        Worksheets("A").Range("atopar").Offset(i + 1) = summe - Worksheets("A").Range("atotal").Offset(1)
+        i = i + 1
+Loop
+
+
+
+For i = 1 To 11
+        j = 1
+        summe = 0
+        Do While Worksheets("A").Range("apar").Offset(j, 1) <> ""
+                summe = summe + Worksheets("A").Range("apar").Offset(j, i)
+                j = j + 1
+        Loop
+        Worksheets("A").Range("aschnitt").Offset(0, i) = summe / (j - 1)
+Next i
+
+
+
+i = 1
+summe = 0
+Do While Worksheets("A").Range("atopar").Offset(i + 1) <> ""
+        summe = summe + Worksheets("A").Range("atopar").Offset(i + 1)
+        i = i + 1
+Loop
+Worksheets("A").Range("atopar").Offset(1) = summe
+
+
+
+Dim rank() As Integer
+ReDim rank(9)
+
+
+For i = 1 To 9
+        max = -5
+        For j = 1 To 9
+                b = False
+                For k = 1 To 9
+                        If Worksheets("A").Range("ahole").Offset(0, j) = rank(k) Then
+                                b = True
+                        End If
+                Next k
+                
+                If b = False Then
+                        If Worksheets("A").Range("aschnitt").Offset(0, j) - Worksheets("A").Range("apar").Offset(0, j) > max Then
+                                max = Worksheets("A").Range("aschnitt").Offset(0, j) - Worksheets("A").Range("apar").Offset(0, j)
+                                rank(i) = Worksheets("A").Range("ahole").Offset(0, j)
+                        End If
+                End If
+        Next j
+        
+Next i
+
+For i = 1 To 9
+        Worksheets("A").Range("arhole").Offset(i) = "A" & rank(i)
+        Worksheets("A").Range("arrank").Offset(i) = i
+Next i
+                        
+                        
+                                
+Dim bs1 As Integer
+Dim bs2 As Integer
+Dim bs3 As Integer
+Dim bs4 As Integer
+Dim bs5 As Integer
+
+bs1 = 0
+bs2 = 0
+bs3 = 0
+bs4 = 0
+bs5 = 0
+
+i = 1
+Do While Worksheets("A").Range("apar").Offset(i, 1) <> ""
+        For j = 1 To 9
+                Select Case Worksheets("A").Range("apar").Offset(i, j) - Worksheets("A").Range("apar").Offset(0, j)
+                        Case Is = -2
+                                bs1 = bs1 + 1
+                                Worksheets("A").Range("apar").Offset(i, j).Interior.Color = RGB(255, 188, 24)
+                        Case Is = -1
+                                bs2 = bs2 + 1
+                                Worksheets("A").Range("apar").Offset(i, j).Interior.Color = RGB(194, 0, 14)
+                        Case Is = 0
+                                bs3 = bs3 + 1
+                                Worksheets("A").Range("apar").Offset(i, j).Interior.Color = RGB(255, 255, 255)
+                        Case Is = 1
+                                bs4 = bs4 + 1
+                                Worksheets("A").Range("apar").Offset(i, j).Interior.Color = RGB(11, 95, 174)
+                        Case Is > 1
+                                bs5 = bs5 + 1
+                                Worksheets("A").Range("apar").Offset(i, j).Interior.Color = RGB(47, 63, 104)
+                End Select
+        Next j
+        i = i + 1
+Loop
+i = i - 1
+Worksheets("A").Range("aseagle") = bs1 / (i * 9)
+Worksheets("A").Range("asbirdie") = bs2 / (i * 9)
+Worksheets("A").Range("aspar") = bs3 / (i * 9)
+Worksheets("A").Range("asbogey") = bs4 / (i * 9)
+Worksheets("A").Range("asworse") = bs5 / (i * 9)
+
+End If
+
+
+
+
+
+
+
+
+
+'For B
+
+If Worksheets("B").Range("bpar").Offset(1, 1) <> "" Then
+
+i = 1
+Do While Worksheets("B").Range("bpar").Offset(i, 1) <> ""
+        summe = 0
+        For j = 1 To 9
+                summe = summe + Worksheets("B").Range("bpar").Offset(i, j)
+        Next j
+        Worksheets("B").Range("btotal").Offset(i + 1) = summe
+        Worksheets("B").Range("btopar").Offset(i + 1) = summe - Worksheets("B").Range("btotal").Offset(1)
+        i = i + 1
+Loop
+
+
+
+For i = 1 To 11
+        j = 1
+        summe = 0
+        Do While Worksheets("B").Range("bpar").Offset(j, 1) <> ""
+                summe = summe + Worksheets("B").Range("bpar").Offset(j, i)
+                j = j + 1
+        Loop
+        Worksheets("B").Range("bschnitt").Offset(0, i) = summe / (j - 1)
+Next i
+
+
+
+i = 1
+summe = 0
+Do While Worksheets("B").Range("btopar").Offset(i + 1) <> ""
+        summe = summe + Worksheets("B").Range("btopar").Offset(i + 1)
+        i = i + 1
+Loop
+Worksheets("B").Range("btopar").Offset(1) = summe
+
+
+ReDim rank(9)
+
+
+For i = 1 To 9
+        max = -5
+        For j = 1 To 9
+                b = False
+                For k = 1 To 9
+                        If Worksheets("B").Range("bhole").Offset(0, j) = rank(k) Then
+                                b = True
+                        End If
+                Next k
+                
+                If b = False Then
+                        If Worksheets("B").Range("bschnitt").Offset(0, j) - Worksheets("B").Range("bpar").Offset(0, j) > max Then
+                                max = Worksheets("B").Range("bschnitt").Offset(0, j) - Worksheets("B").Range("bpar").Offset(0, j)
+                                rank(i) = Worksheets("B").Range("bhole").Offset(0, j)
+                        End If
+                End If
+        Next j
+        
+Next i
+
+For i = 1 To 9
+        Worksheets("B").Range("brhole").Offset(i) = "B" & rank(i)
+        Worksheets("B").Range("brrank").Offset(i) = i
+Next i
+                        
+                        
+                                
+
+bs1 = 0
+bs2 = 0
+bs3 = 0
+bs4 = 0
+bs5 = 0
+
+i = 1
+Do While Worksheets("B").Range("bpar").Offset(i, 1) <> ""
+        For j = 1 To 9
+                Select Case Worksheets("B").Range("bpar").Offset(i, j) - Worksheets("B").Range("bpar").Offset(0, j)
+                        Case Is = -2
+                                bs1 = bs1 + 1
+                                Worksheets("B").Range("bpar").Offset(i, j).Interior.Color = RGB(255, 188, 24)
+                        Case Is = -1
+                                bs2 = bs2 + 1
+                                Worksheets("B").Range("bpar").Offset(i, j).Interior.Color = RGB(194, 0, 14)
+                        Case Is = 0
+                                bs3 = bs3 + 1
+                                Worksheets("B").Range("bpar").Offset(i, j).Interior.Color = RGB(255, 255, 255)
+                        Case Is = 1
+                                bs4 = bs4 + 1
+                                Worksheets("B").Range("bpar").Offset(i, j).Interior.Color = RGB(11, 95, 174)
+                        Case Is > 1
+                                bs5 = bs5 + 1
+                                Worksheets("B").Range("bpar").Offset(i, j).Interior.Color = RGB(47, 63, 104)
+                End Select
+        Next j
+        i = i + 1
+Loop
+i = i - 1
+Worksheets("B").Range("bseagle") = bs1 / (i * 9)
+Worksheets("B").Range("bsbirdie") = bs2 / (i * 9)
+Worksheets("B").Range("bspar") = bs3 / (i * 9)
+Worksheets("B").Range("bsbogey") = bs4 / (i * 9)
+Worksheets("B").Range("bsworse") = bs5 / (i * 9)
+
+End If
+
+
+
+
+
+
+
+
+
+'For C
+
+If Worksheets("C").Range("cpar").Offset(1, 1) <> "" Then
+
+i = 1
+Do While Worksheets("C").Range("cpar").Offset(i, 1) <> ""
+        summe = 0
+        For j = 1 To 9
+                summe = summe + Worksheets("C").Range("cpar").Offset(i, j)
+        Next j
+        Worksheets("C").Range("ctotal").Offset(i + 1) = summe
+        Worksheets("C").Range("ctopar").Offset(i + 1) = summe - Worksheets("C").Range("ctotal").Offset(1)
+        i = i + 1
+Loop
+
+
+
+For i = 1 To 11
+        j = 1
+        summe = 0
+        Do While Worksheets("C").Range("cpar").Offset(j, 1) <> ""
+                summe = summe + Worksheets("C").Range("cpar").Offset(j, i)
+                j = j + 1
+        Loop
+        Worksheets("C").Range("cschnitt").Offset(0, i) = summe / (j - 1)
+Next i
+
+
+
+i = 1
+summe = 0
+Do While Worksheets("C").Range("ctopar").Offset(i + 1) <> ""
+        summe = summe + Worksheets("C").Range("ctopar").Offset(i + 1)
+        i = i + 1
+Loop
+Worksheets("C").Range("ctopar").Offset(1) = summe
+
+
+
+ReDim rank(9)
+
+
+For i = 1 To 9
+        max = -5
+        For j = 1 To 9
+                b = False
+                For k = 1 To 9
+                        If Worksheets("C").Range("chole").Offset(0, j) = rank(k) Then
+                                b = True
+                        End If
+                Next k
+                
+                If b = False Then
+                        If Worksheets("C").Range("cschnitt").Offset(0, j) - Worksheets("C").Range("cpar").Offset(0, j) > max Then
+                                max = Worksheets("C").Range("cschnitt").Offset(0, j) - Worksheets("C").Range("cpar").Offset(0, j)
+                                rank(i) = Worksheets("C").Range("chole").Offset(0, j)
+                        End If
+                End If
+        Next j
+        
+Next i
+
+For i = 1 To 9
+        Worksheets("C").Range("crhole").Offset(i) = "C" & rank(i)
+        Worksheets("C").Range("crrank").Offset(i) = i
+Next i
+                        
+                        
+
+bs1 = 0
+bs2 = 0
+bs3 = 0
+bs4 = 0
+bs5 = 0
+
+i = 1
+Do While Worksheets("C").Range("cpar").Offset(i, 1) <> ""
+        For j = 1 To 9
+                Select Case Worksheets("C").Range("cpar").Offset(i, j) - Worksheets("C").Range("cpar").Offset(0, j)
+                        Case Is = -2
+                                bs1 = bs1 + 1
+                                Worksheets("C").Range("cpar").Offset(i, j).Interior.Color = RGB(255, 188, 24)
+                        Case Is = -1
+                                bs2 = bs2 + 1
+                                Worksheets("C").Range("cpar").Offset(i, j).Interior.Color = RGB(194, 0, 14)
+                        Case Is = 0
+                                bs3 = bs3 + 1
+                                Worksheets("C").Range("cpar").Offset(i, j).Interior.Color = RGB(255, 255, 255)
+                        Case Is = 1
+                                bs4 = bs4 + 1
+                                Worksheets("C").Range("cpar").Offset(i, j).Interior.Color = RGB(11, 95, 174)
+                        Case Is > 1
+                                bs5 = bs5 + 1
+                                Worksheets("C").Range("cpar").Offset(i, j).Interior.Color = RGB(47, 63, 104)
+                End Select
+        Next j
+        i = i + 1
+Loop
+i = i - 1
+Worksheets("C").Range("cseagle") = bs1 / (i * 9)
+Worksheets("C").Range("csbirdie") = bs2 / (i * 9)
+Worksheets("C").Range("cspar") = bs3 / (i * 9)
+Worksheets("C").Range("csbogey") = bs4 / (i * 9)
+Worksheets("C").Range("csworse") = bs5 / (i * 9)
+
+End If
+
+End Sub
